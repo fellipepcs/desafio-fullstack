@@ -1,0 +1,45 @@
+<mat-card>
+    <mat-card-title>
+        Cadastro da Localização
+    </mat-card-title>
+    <form [formGroup]="formCadastro">
+        <mat-form-field>
+            <input formControlName="nome" matInput placeholder="Nome" [(ngModel)]="localidade.nome" name="name">
+            <ng-container *ngFor="let erro of mensagens.nome">
+                <span class="msg-erro" *ngIf="formCadastro.get('nome')?.hasError(erro.tipo) && 
+            (formCadastro.get('nome')?.dirty || formCadastro.get('nome')?.touched)">
+                    {{erro.mensagem}}
+                </span>
+            </ng-container>
+        </mat-form-field>
+        <mat-form-field>
+            <input formControlName="longitude" matInput placeholder="Longitude" [(ngModel)]="localidade.longitude"
+                name="Longitude">
+            <ng-container *ngFor="let erro of mensagens.longitude">
+                <span class="msg-erro" *ngIf="formCadastro.get('longitude')?.hasError(erro.tipo) && 
+                (formCadastro.get('longitude')?.dirty || formCadastro.get('longitude')?.touched)">
+                    {{erro.mensagem}}
+                </span>
+            </ng-container>
+        </mat-form-field>
+        <mat-form-field>
+            <input formControlName="latitude" matInput placeholder="Latitude" [(ngModel)]="localidade.latitude"
+                name="Latitude.">
+                <ng-container *ngFor="let erro of mensagens.latitude">
+                    <span class="msg-erro" *ngIf="formCadastro.get('latitude')?.hasError(erro.tipo) && 
+                    (formCadastro.get('latitude')?.dirty || formCadastro.get('latitude')?.touched)">
+                        {{erro.mensagem}}
+                    </span>
+                </ng-container>
+        </mat-form-field>
+    </form>
+</mat-card>
+
+
+<button mat-raised-button (click)="createProduct()" (click)="salvarCadastro()" color="green">
+    Salvar
+</button>
+
+<button mat-raised-button (click)="cancelar()">
+    Cancelar
+</button>
