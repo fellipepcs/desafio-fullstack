@@ -39,4 +39,5 @@ export class ProductService {
   read(): Observable<Localidade[]>{
     return this.http.get<Localidade[]>(this.baseUrl)
   }
+  
 }

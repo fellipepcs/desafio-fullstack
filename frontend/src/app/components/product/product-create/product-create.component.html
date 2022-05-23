@@ -25,18 +25,18 @@
         <mat-form-field>
             <input formControlName="latitude" matInput placeholder="Latitude" [(ngModel)]="localidade.latitude"
                 name="Latitude.">
-                <ng-container *ngFor="let erro of mensagens.latitude">
-                    <span class="msg-erro" *ngIf="formCadastro.get('latitude')?.hasError(erro.tipo) && 
-                    (formCadastro.get('latitude')?.dirty || formCadastro.get('latitude')?.touched)">
-                        {{erro.mensagem}}
-                    </span>
-                </ng-container>
+            <ng-container *ngFor="let erro of mensagens.latitude">
+                <span class="msg-erro" *ngIf="formCadastro.get('latitude')?.hasError(erro.tipo) && 
+                (formCadastro.get('latitude')?.dirty || formCadastro.get('latitude')?.touched)">
+                    {{erro.mensagem}}
+                </span>
+            </ng-container>
         </mat-form-field>
     </form>
 </mat-card>
 
 
-<button mat-raised-button (click)="createProduct()" (click)="salvarCadastro()" color="green">
+<button mat-raised-button (click)="createProduct()" color="green">
     Salvar
 </button>
 

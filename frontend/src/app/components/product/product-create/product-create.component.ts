@@ -1,3 +1,4 @@
+import { validationLongitude } from './../../../validator/validacoes-alt-lat';
 import { Localidade } from '../localizacao.model';
 import { ProductService } from './../product.service';
 import { Component, OnInit } from '@angular/core';
@@ -25,21 +26,21 @@ export class ProductCreateComponent implements OnInit {
       { tipo: 'required', mensagem: 'O campo nome é obrigatório' }],
     longitude: [
       { tipo: 'required', mensagem: 'O campo longitude é obrigatório' },
-      { tipo: 'minlength', mensagem: 'Digite um valor maior que -180'},
-      { tipo: 'maxlength', mensagem: 'Digite um valor menor que 180'}
+      { tipo: 'minLength', mensagem: 'Digite um valor maior que -180' },
+      { tipo: 'maxLength', mensagem: 'Digite um valor menor que 180' }
     ],
     latitude: [
       { tipo: 'required', mensagem: 'O campo latitude é obrigatório' },
-      { tipo: 'minlength', mensagem: 'Digite um valor maior que -90'},
-      { tipo: 'maxlength', mensagem: 'Digite um valor menor que 90'}
-      
+      { tipo: 'minLength', mensagem: 'Digite um valor maior que -90' },
+      { tipo: 'maxLength', mensagem: 'Digite um valor menor que 90' }
+
     ]
   }
 
   constructor(private productService: ProductService, private router: Router, private formBuilder: FormBuilder) {
     this.formCadastro = this.formBuilder.group({
       nome: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
-      logintude: ['', Validators.compose([Validators.required, Validators.minLength(-180), Validators.maxLength(180)])],
+      longitude: ['', Validators.compose([Validators.required, Validators.minLength(-180), Validators.maxLength(180)])],
       latitude: ['', Validators.compose([Validators.required, Validators.minLength(-90), Validators.maxLength(90)])]
     })
 
@@ -47,13 +48,14 @@ export class ProductCreateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  salvarCadastro() {
-    console.log('Formulario', this.formCadastro.valid);
-  }
-
   createProduct(): void {
-    this.productService.create(this.localidade).subscribe(() => {
-      this.productService.showMessage('Produto criado!')
+    const localidade = {
+      nome: this.localidade.nome,
+      latitude: Number(this.localidade.latitude),
+      longitude: Number(this.localidade.longitude)
+    }
+    this.productService.create(localidade).subscribe(() => {
+      this.productService.showMessage('Localização Salva!')
       this.router.navigate(['/products'])
     })
   }
