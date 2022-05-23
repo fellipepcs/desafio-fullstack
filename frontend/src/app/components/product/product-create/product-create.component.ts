@@ -26,13 +26,13 @@ export class ProductCreateComponent implements OnInit {
       { tipo: 'required', mensagem: 'O campo nome é obrigatório' }],
     longitude: [
       { tipo: 'required', mensagem: 'O campo longitude é obrigatório' },
-      { tipo: 'minLength', mensagem: 'Digite um valor maior que -180' },
-      { tipo: 'maxLength', mensagem: 'Digite um valor menor que 180' }
+      { tipo: 'min', mensagem: 'Digite um valor maior que -180' },
+      { tipo: 'max', mensagem: 'Digite um valor menor que 180' }
     ],
     latitude: [
       { tipo: 'required', mensagem: 'O campo latitude é obrigatório' },
-      { tipo: 'minLength', mensagem: 'Digite um valor maior que -90' },
-      { tipo: 'maxLength', mensagem: 'Digite um valor menor que 90' }
+      { tipo: 'min', mensagem: 'Digite um valor maior que -90' },
+      { tipo: 'max', mensagem: 'Digite um valor menor que 90' }
 
     ]
   }
@@ -40,8 +40,8 @@ export class ProductCreateComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router, private formBuilder: FormBuilder) {
     this.formCadastro = this.formBuilder.group({
       nome: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
-      longitude: ['', Validators.compose([Validators.required, Validators.minLength(-180), Validators.maxLength(180)])],
-      latitude: ['', Validators.compose([Validators.required, Validators.minLength(-90), Validators.maxLength(90)])]
+      longitude: [, Validators.compose([Validators.required, Validators.min(-180), Validators.max(180)])],
+      latitude: [, Validators.compose([Validators.required, Validators.min(-90), Validators.max(90)])]
     })
 
   }
